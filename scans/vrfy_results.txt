@@ -1,0 +1,68 @@
+# VRFY Enumeration Results
+
+## Stage 1 – Default Timeout
+
+Command:
+smtp-user-enum -M VRFY -U names.txt -t <TARGET-IP>
+
+Timeout:
+-w 5
+
+Result:
+0 results
+
+---
+
+## Stage 2 – Increased Timeout
+
+Command:
+smtp-user-enum -M VRFY -U names.txt -t <TARGET-IP> -w 10
+
+Result:
+0 results
+
+---
+
+## Stage 3 – Extended Timeout
+
+Command:
+smtp-user-enum -M VRFY -U names.txt -t <TARGET-IP> -w 15
+
+Result:
+1 result found
+
+---
+
+## Manual Verification
+
+VRFY root
+252 2.0.0 root
+
+VRFY mike
+252 2.0.0 mike
+
+VRFY admin
+550 5.1.1 User unknown
+
+VRFY random
+550 5.1.1 User unknown
+
+---
+
+## Interpretation
+
+550:
+- Invalid user
+
+252:
+- Possible valid user
+- Server hides confirmation due to anti-enumeration protection
+
+The differing server responses identified:
+- root
+- mike
+
+as probable valid usernames.
+
+The final identified user account was:
+mike
