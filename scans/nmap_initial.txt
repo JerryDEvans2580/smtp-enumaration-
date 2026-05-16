@@ -1,1 +1,19 @@
+# Nmap Initial SMTP Scan
 
+Command:
+nmap -p25 -sV -sC <TARGET-IP>
+
+Purpose:
+- Detect SMTP service
+- Identify banner
+- Identify SMTP capabilities
+- Extract domain information
+
+Findings:
+- SMTP service running on port 25
+- ESMTP detected
+- Domain identified:
+  inlanefreight.htb
+
+Notes:
+The SMTP banner provided useful footprinting information that later helped during username enumeration.
