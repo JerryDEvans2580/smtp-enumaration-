@@ -1,0 +1,45 @@
+# SMTP Enumeration Results
+
+## Nmap smtp-enum-users
+
+Command:
+nmap -p25 --script smtp-enum-users <TARGET-IP>
+
+Returned usernames:
+
+root
+admin
+administrator
+webadmin
+sysadmin
+netadmin
+guest
+user
+web
+test
+
+Analysis:
+The results initially appeared valid but later proved unreliable due to catch-all SMTP behavior.
+
+---
+
+## RCPT Enumeration
+
+Manual testing:
+
+EHLO test.com
+MAIL FROM:<test@test.com>
+
+RCPT TO:<admin@inlanefreight.htb>
+250 2.1.5 Ok
+
+RCPT TO:<root@inlanefreight.htb>
+250 2.1.5 Ok
+
+RCPT TO:<random123@inlanefreight.htb>
+250 2.1.5 Ok
+
+Conclusion:
+The SMTP server accepted all recipient addresses.
+
+This confirmed a catch-all configuration and invalidated RCPT-based username enumeration.
